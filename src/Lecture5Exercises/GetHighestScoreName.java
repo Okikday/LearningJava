@@ -3,6 +3,7 @@ package Lecture5Exercises;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+// Improved with AI
 public class GetHighestScoreName {
 
     public static void main(String[] args) {
@@ -23,9 +24,18 @@ public class GetHighestScoreName {
             if (name.equalsIgnoreCase("exit"))
                 break;
 
-            io.print("Enter score for " + name + ": ");
-            int score = scanner.nextInt();
-            scanner.nextLine();
+            io.print("Enter score for " + name + " (or type 'exit' to end program): ");
+            String scoreStr = scanner.nextLine();
+            if (scoreStr.equalsIgnoreCase("exit"))
+                break;
+
+            int score;
+            try {
+                score = Integer.parseInt(scoreStr);
+            } catch (NumberFormatException e) {
+                io.println("Invalid input. Please enter an integer score.");
+                continue;
+            }
 
             if (score < lowestScore || count == 0) {
                 lowestScore = score;
